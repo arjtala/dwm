@@ -1,0 +1,48 @@
+From 01a9c9a743aa3f083e9b270b87df2c39ebb7210c Mon Sep 17 00:00:00 2001
+From: mihirlad55 <mihirlad55@gmail.com>
+Date: Sun, 26 Sep 2021 00:36:42 +0000
+Subject: [PATCH] Update from v1.1.1 to v1.1.2
+
+- Update patch for latest dwm commit
+---
+ config.def.h | 1 +
+ dwm.c        | 4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index d0d60aa..04ba79c 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -38,6 +38,7 @@ static const Rule rules[] = {
+ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+ static const int nmaster     = 1;    /* number of clients in master area */
+ static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+ 
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+diff --git a/dwm.c b/dwm.c
+index e21a160..5b83358 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -444,7 +444,7 @@ buttonpress(XEvent *e)
+ 			arg.ui = 1 << i;
+ 		} else if (ev->x < x + blw)
+ 			click = ClkLtSymbol;
+-		else if (ev->x > selmon->ww - TEXTW(stext))
++		else if (ev->x > selmon->ww - (int)TEXTW(stext))
+ 			click = ClkStatusText;
+ 		else
+ 			click = ClkWinTitle;
+@@ -848,7 +848,7 @@ focusstack(const Arg *arg)
+ {
+ 	Client *c = NULL, *i;
+ 
+-	if (!selmon->sel)
++	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
+ 		return;
+ 	if (arg->i > 0) {
+ 		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
+-- 
+2.33.0
+
