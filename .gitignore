@@ -3,3 +3,4 @@ dwm
 dwm-msg
 config.def.h.orig config.mk.orig drw.c.orig drw.h.orig dwm.1.orig dwm.c.orig dwm-msg.c.orig IPCClient.c.orig
 config.def.h.rej config.mk.rej dwm.1.rej dwm.c.rej dwm-msg.c.rej IPCClient.c.rej
+*.o

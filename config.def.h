@@ -25,6 +25,7 @@ static const int vertpadbar         = 8;        /* vertical padding for statusba
 static const char *fonts[]     = {"Hack:size=8:antialias=true:autohint=true",
                                   "Noto Sans:size=10:antialias=true:autohint=true"
 						     	};
+
 static const char col_1[]  = "#282c34"; /* background color of bar */
 static const char col_2[]  = "#282c34"; /* border color unfocused windows */
 static const char col_3[]  = "#d7d7d7";
@@ -93,13 +94,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]    = { "alacritty", NULL };
-static const char *roficmd[]    = { "~/.local/bin/launch_rofi.sh", NULL };
 static const char *trayercmd[]  = { "trayer", "--edge", "top", "--align", "center", "--widthtype", "request", "--padding", "7", "--SetDockType", "true", "--SetPartialStrut", "false", "--expand", "true", "--monitor", "0", "--transparent", "true", "--alpha", "0", "--tint", "0x924441", "--height", "17", NULL };
 
 static Keychord keychords[] = {
 	/* Keys                              function         argument */
 	{1, {{MODKEY|ShiftMask, XK_Return}}, spawn,           SHCMD("~/.local/bin/launch_rofi.sh") },
-	{1, {{MODKEY, XK_p}},                spawn,           {.v = roficmd } },
+	{1, {{MODKEY|ShiftMask, XK_l}},		 spawn,           SHCMD("betterlockscreen --lock") },
 	{1, {{MODKEY, XK_Return}},			 spawn,           {.v = termcmd } },
 	{1, {{MODKEY|ShiftMask, XK_c}},		 killclient,      {0} },
 
